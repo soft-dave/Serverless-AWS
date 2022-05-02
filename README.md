@@ -12,20 +12,6 @@ The application uses several AWS resources, including Lambda functions, an API G
 If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
 The AWS Toolkit is an open-source plugin for popular IDEs that uses the AWS SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds step-through debugging for Lambda function code. 
 
-To get started, see the following:
-
-* [CLion](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [GoLand](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [WebStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [Rider](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PhpStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [RubyMine](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [DataGrip](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
-* [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
-
 ## Deploy the sample application
 
 The AWS SAM CLI is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
@@ -88,10 +74,6 @@ The AWS SAM CLI reads the application template to determine the API's routes and
           Properties:
             Path: /
             Method: GET
-```
-
-## Add a resource to your application
-The application template uses AWS SAM to define application resources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application resources, such as functions, triggers, and APIs. For resources that aren't included in the [AWS SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use the standard [AWS CloudFormation resource types](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
 
 Update `template.yaml` to add a dead-letter queue to your application. In the **Resources** section, add a resource named **MyQueue** with the type **AWS::SQS::Queue**. Then add a property to the **AWS::Serverless::Function** resource named **DeadLetterQueue** that targets the queue's Amazon Resource Name (ARN), and a policy that grants the function permission to access the queue.
 
@@ -132,10 +114,6 @@ To simplify troubleshooting, the AWS SAM CLI has a command called `sam logs`. `s
 my-application$ sam logs -n putItemFunction --stack-name sam-app --tail
 ```
 
-**NOTE:** This uses the logical name of the function within the stack. This is the correct name to use when searching logs inside an AWS Lambda function within a CloudFormation stack, even if the deployed function name varies due to CloudFormation's unique resource name generation.
-
-You can find more information and examples about filtering Lambda function logs in the [AWS SAM CLI documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
-
 ## Unit tests
 
 Tests are defined in the `__tests__` folder in this project. Use `npm` to install the [Jest test framework](https://jestjs.io/) and run unit tests.
@@ -153,20 +131,6 @@ To delete the sample application that you created, use the AWS CLI. Assuming you
 aws cloudformation delete-stack --stack-name stage-dance-sam-app
 ```
 
-## Resources
-
-For an introduction to the AWS SAM specification, the AWS SAM CLI, and serverless application concepts, see the [AWS SAM Developer Guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html).
-
-Next, you can use the AWS Serverless Application Repository to deploy ready-to-use apps that go beyond Hello World samples and learn how authors developed their applications. For more information, see the [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/) and the [AWS Serverless Application Repository Developer Guide](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html).
-
-
-
-## UX Links
-
-- https://www.figma.com/file/eDiDCK3MMWtXG6dssBgma4/SDA-new
-- https://www.figma.com/file/5naBQ5WZjQSeaghYgP6z54/SDA-(Copy)
-- https://www.figma.com/file/yZoaW3EbOZyOV4sNVXdWys/SDA-Webbrowser-(Copy)
-
 ## Documentation
 
 - IN PROGRESS
@@ -180,10 +144,3 @@ Next, you can use the AWS Serverless Application Repository to deploy ready-to-u
 - AWS S3 - Video Repository
 - AWS Elemental Media Convert - Video Encoding for different bit rates
 - DynamoDB
-
-## Blogs
-- https://levelup.gitconnected.com/use-presigned-url-to-upload-files-into-aws-s3-db6b7a8c2cc9
-- https://aws.plainenglish.io/how-to-test-amazon-sqs-with-docker-using-serverless-b717258f5d3d
-- https://medium.com/@aidan.hallett/securing-aws-s3-uploads-using-presigned-urls-aa821c13ae8d
-- https://evilmartians.com/chronicles/serverless-typescript-a-complete-setup-for-aws-sam-lambda
-- https://www.youtube.com/watch?v=o7OHogUcRmI
